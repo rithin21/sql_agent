@@ -5,14 +5,23 @@ import heroImg from './assets/hero.png'
 import './App.css'
 import Navbar from './components/Navbar'
 import Mainpage from './components/Mainpage'
+import Querypage from './components/Querypage'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [Connectionstatus, setConnectionstatus] = useState(false);
+  const[ConnectionName,setConnectionName]=useState('')
+  const[ConnectionURL,setConnectionURL]=useState('')
 
   return (
     <>
-      <Navbar/>
-      <Mainpage />
+    <Navbar />
+    {
+      !Connectionstatus ? 
+      <>
+        <Mainpage setConnectionstatus={setConnectionstatus} setConnectionName={setConnectionName} setConnectionURL={setConnectionURL}/>
+      </>:
+      <Querypage ConnectionName={ConnectionName} ConnectionString={ConnectionURL}/>
+    }
     </>
   )
 }

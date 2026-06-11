@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState } from 'react'
 
-export default function Mainpage() {
+export default function Mainpage(props) {
 
     const[showinput,setShowinput] = useState(false);
     const[connectionString,setConnectionString] = useState("");
@@ -16,7 +16,15 @@ export default function Mainpage() {
             body:JSON.stringify({connectionString})   
         })
 
-        console.log(res.status)
+       
+        const data = await res.json();
+
+        if (res.status === 200) {
+            props.setConnectionstatus(true);
+            console.log(data);
+            props.setConnectionName(data.connection_name);
+            props.setConnectionURL(connectionString);
+        }
     }
     return (
     <>
